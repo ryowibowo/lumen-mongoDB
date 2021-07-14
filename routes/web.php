@@ -19,9 +19,21 @@ $router->get('/', function () use ($router) {
 
 
 
-$router->get('/api/users','UserController@index');
-$router->get('/api/users/{id}','UserController@get');
-$router->post('/api/create','UserController@create');
-$router->post('/api/edit/{id}','UserController@update');
-$router->delete('/api/delete/{id}','UserController@delete');
-$router->get('/api','UserController@test');
+
+
+// API route group
+$router->group(['prefix' => 'api'], function () use ($router) {
+
+	$router->get('users','UserController@index');
+	$router->get('users/{id}','UserController@get');
+	$router->post('create','UserController@create');
+	$router->post('edit/{id}','UserController@update');
+	$router->delete('delete/{id}','UserController@delete');
+	$router->get('test','UserController@test');
+
+
+	//auth
+    $router->post('login', 'AuthController@login');
+    $router->get('checkLogin', 'ExampleController@checkLogin');
+
+});

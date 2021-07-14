@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,10 +14,13 @@ class UserController extends Controller
 {
 
 
+
     /**
-     * Pour recupérer tous les utilsateurs de la BD
-     * @return \Illuminate\Http\JsonResponse
+     * Instantiate a new UserController instance.
+     *
+     * @return void
      */
+
     public function index()
     {
         $users = User::all();
@@ -48,6 +52,7 @@ class UserController extends Controller
         $user = new User();
 
         $user->name = $request->input('name');
+        $user->email = $request->input('email');
         $user->username = $request->input('username');
         $user->password = Hash::make($request->input('password'));
         $user->save();
@@ -96,6 +101,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         $user->name = $request->input('name');
+        $user->email = $request->input('email');
         $user->username = $request->input('username');
         $user->password = Hash::make($request->input('password'));
 
@@ -104,7 +110,7 @@ class UserController extends Controller
         if(!$user){
             return response()->json(['isSuccess' => false, 'message' => 'Whoops, Something went wrong'], 500);
         }else{
-            return response()->json(['isSuccess' => true, 'message' => 'Berhasil menambahkan user'], 200);
+            return response()->json(['isSuccess' => true, 'message' => 'Berhasil mengubah user'], 200);
         }
     }
 
