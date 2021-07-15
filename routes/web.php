@@ -37,3 +37,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('checkLogin', 'ExampleController@checkLogin');
 
 });
+
+$router->get('/debug-sentry', function () {
+    throw new Exception('My first Sentry error!');
+});

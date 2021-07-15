@@ -93,15 +93,20 @@ $app->routeMiddleware([
 */
 
 
-// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(\Illuminate\Mail\MailServiceProvider::class);
 
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
 $app->register(Jenssegers\Mongodb\MongodbServiceProvider::class);
 $app->withEloquent();
 
+$app->register('Sentry\Laravel\ServiceProvider');
+$app->register('Sentry\Laravel\Tracing\ServiceProvider');
+$app->configure('services');
+$app->configure('mail');
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
